@@ -1,0 +1,24 @@
+/* mobile navbar sidebar under lg breakpoint */
+@media (max-width: 992px) {
+  :global(.navbar-collapse.collapsing) :global(.navbar-nav) {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -25%;
+    transition: all 0.2s ease;
+  }
+
+  :global(.navbar-collapse.show) :global(.navbar-nav) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: column;
+    height: auto;
+    width: 25%;
+    transition: left 0.35s ease;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    color: red;
+  }
+}
