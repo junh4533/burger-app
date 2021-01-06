@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Fragment } from "react";
 
 const OrderSummary = (props) => {
   const ingredientSummary = Object.keys(props.ingredients).map((igKey) => {
@@ -13,6 +12,9 @@ const OrderSummary = (props) => {
   return (
     <Fragment>
       <ul>{ingredientSummary}</ul>
+      <p>
+        Total Price: <b>{props.price}</b>
+      </p>
     </Fragment>
   );
 };

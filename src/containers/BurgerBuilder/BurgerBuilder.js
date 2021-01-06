@@ -3,6 +3,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import CustomModal from "../../components/UI/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary";
+import Navigation from "../../components/Navigation";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -84,13 +85,19 @@ class BurgerBuilder extends Component {
       ...this.state.ingredients,
     };
 
-    const orderSummary = <OrderSummary ingredients={this.state.ingredients} />;
+    const orderSummary = (
+      <OrderSummary
+        ingredients={this.state.ingredients}
+        price={"$" + this.state.totalPrice}
+      />
+    );
 
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     return (
       <Fragment>
+        <Navigation />
         <CustomModal
           body={orderSummary}
           show={this.state.purchasing}
