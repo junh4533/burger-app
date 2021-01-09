@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import CustomModal from "../../components/UI/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary";
 import Navigation from "../../components/Navigation";
+import classes from "./BurgerBuilder.module.scss";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -96,23 +98,35 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     return (
-      <Fragment>
+      <div className={classes.burgerBuilderContainer}>
         <Navigation />
         <CustomModal
           body={orderSummary}
           show={this.state.purchasing}
           hide={this.hideModalHandler}
         />
-        <Burger ingredients={this.state.ingredients} />
-        <BuildControls
-          ingredientAdded={this.addIngredientsHandler}
-          ingredientRemoved={this.removeIngredientsHandler}
-          disabled={disabledInfo}
-          price={this.state.totalPrice}
-          purchaseable={this.state.purchaseable}
-          ordered={this.purchaseHandler}
-        />
-      </Fragment>
+        <Container fluid>
+          <Row>
+            <Col xs={12} lg={6}>
+              <Burger ingredients={this.state.ingredients} />
+            </Col>
+            <Col
+              xs={12}
+              lg={6}
+              className="d-flex justify-content-center align-items-center"
+            >
+              <BuildControls
+                ingredientAdded={this.addIngredientsHandler}
+                ingredientRemoved={this.removeIngredientsHandler}
+                disabled={disabledInfo}
+                price={this.state.totalPrice}
+                purchaseable={this.state.purchaseable}
+                ordered={this.purchaseHandler}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }

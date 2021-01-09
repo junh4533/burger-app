@@ -35,4 +35,12 @@ CustomModal.propTypes = {
   //
 };
 
-export default CustomModal;
+export default React.memo(CustomModal, (props, nextProps) => {
+  if (props.show !== nextProps.show) {
+    // return true if you don't need re-render
+    console.log("re-render");
+    return false;
+  }
+});
+
+// export default CustomModal;

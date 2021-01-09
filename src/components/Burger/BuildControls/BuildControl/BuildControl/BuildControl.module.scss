@@ -5,29 +5,29 @@
   margin: 5px 0;
 }
 
-.BuildControl button {
-  display: block;
-  font: inherit;
-  padding: 5px;
-  margin: 0 5px;
-  width: 80px;
-  border: 1px solid #aa6817;
-  cursor: pointer;
-  outline: none;
-}
+// .BuildControl button {
+//   display: block;
+//   font: inherit;
+//   padding: 5px;
+//   margin: 0 5px;
+//   width: 80px;
+//   border: 1px solid #aa6817;
+//   cursor: pointer;
+//   outline: none;
+// }
 
-.BuildControl button:disabled {
-  background-color: #ac9980;
-  border: 1px solid #7e7365;
-  color: #ccc;
-  cursor: default;
-}
+// .BuildControl button:disabled {
+//   background-color: #ac9980;
+//   border: 1px solid #7e7365;
+//   color: #ccc;
+//   cursor: default;
+// }
 
-.BuildControl button:hover:disabled {
-  background-color: #ac9980;
-  color: #ccc;
-  cursor: not-allowed;
-}
+// .BuildControl button:hover:disabled {
+//   background-color: #ac9980;
+//   color: #ccc;
+//   cursor: not-allowed;
+// }
 
 .Label {
   padding: 10px;
@@ -55,4 +55,15 @@
 .BuildControl .More:active {
   background-color: #99703f;
   color: white;
+}
+
+.editQuantityButton {
+  color: rgb(247, 198, 0);
+  transition: all.2s ease-in-out;
+  &:hover {
+    color: rgb(79, 43, 35);
+  }
+  &[disabled] {
+    color: rgb(116, 116, 116);
+  }
 }

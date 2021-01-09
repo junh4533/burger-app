@@ -1,22 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classes from "./BuildControl.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlusCircle,
+  faMinusCircle,
+} from "@fortawesome/free-regular-svg-icons";
+import {
+  faPlusCircle as faPlusCircleFilled,
+  faMinusCircle as faMinusCircleFilled,
+} from "@fortawesome/free-solid-svg-icons";
 
 const BuildControl = (props) => {
   return (
     <div className={classes.BuildControl}>
       <div>{props.label}</div>
       <div className={classes.Label}>{props.label}</div>
-      <button
-        className={classes.Less}
+      <FontAwesomeIcon
+        className={classes.editQuantityButton}
+        icon={faMinusCircleFilled}
         onClick={props.removed}
         disabled={props.disabled}
-      >
-        Less
-      </button>
-      <button className={classes.More} onClick={props.added}>
-        More
-      </button>
+      />
+      <FontAwesomeIcon
+        className={classes.editQuantityButton}
+        icon={faPlusCircleFilled}
+        onClick={props.added}
+      />
     </div>
   );
 };
