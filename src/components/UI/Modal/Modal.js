@@ -11,6 +11,11 @@ const CustomModal = (props) => {
     props.show ? setShow(true) : setShow(false);
   }, [props.show]);
 
+  // const confirmClicked = () => {
+  //   props.confirm();
+  //   props.hide();
+  // };
+
   return (
     <Fragment>
       <Modal show={show} onHide={props.hide}>
@@ -22,7 +27,7 @@ const CustomModal = (props) => {
           <Button variant="danger" onClick={props.hide}>
             Cancel
           </Button>
-          <Button variant="success" onClick={props.hide}>
+          <Button variant="success" onClick={props.confirm}>
             Continue
           </Button>
         </Modal.Footer>
