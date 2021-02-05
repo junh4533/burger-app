@@ -19,17 +19,26 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0,
-    },
+    ingredients: null,
     totalPrice: 0,
     purchaseable: false,
     purchasing: false,
     loading: false,
+    error: false,
   };
+
+  componentDidMount() {
+    axios
+      .get(
+        "https://burger-builder-1f1d0-default-rtdb.firebaseio.com/ingredients.json"
+      )
+      .then((res) => {
+        this.setState({ ingredients: res.data });
+      })
+      .catch((err) => {
+        this.setState({ error: true });
+      });
+  }
 
   updatePurchaseState(ingredients) {
     // const ingredients = {
@@ -119,29 +128,15 @@ class BurgerBuilder extends Component {
       ...this.state.ingredients,
     };
 
-    let orderSummary = (
-      <OrderSummary
-        ingredients={this.state.ingredients}
-        price={"$" + this.state.totalPrice}
-      />
-    );
+    let orderSummary = null;
+    let burger = this.state.error ? <p>Server Error</p> : <Spinner />;
 
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
 
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
-    }
-    return (
-      <div className={classes.burgerBuilderContainer}>
-        <Navigation />
-        <CustomModal
-          body={orderSummary}
-          show={this.state.purchasing}
-          hide={this.hideModalHandler}
-          confirm={this.confirmPurchaseHandler}
-        />
+    if (this.state.ingredients) {
+      burger = (
         <Container fluid>
           <Row>
             <Col xs={12} lg={6}>
@@ -163,6 +158,29 @@ class BurgerBuilder extends Component {
             </Col>
           </Row>
         </Container>
+      );
+
+      orderSummary = (
+        <OrderSummary
+          ingredients={this.state.ingredients}
+          price={"$" + this.state.totalPrice}
+        />
+      );
+    }
+
+    if (this.state.loading) {
+      orderSummary = <Spinner />;
+    }
+    return (
+      <div className={classes.burgerBuilderContainer}>
+        <Navigation />
+        <CustomModal
+          body={orderSummary}
+          show={this.state.purchasing}
+          hide={this.hideModalHandler}
+          confirm={this.confirmPurchaseHandler}
+        />
+        {burger}
       </div>
     );
   }
