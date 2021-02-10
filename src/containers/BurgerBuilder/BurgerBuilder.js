@@ -4,7 +4,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import CustomModal from "../../components/UI/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary";
-import Navigation from "../../components/Navigation";
+// import Navigation from "../../components/Navigation";
 import classes from "./BurgerBuilder.module.scss";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner";
@@ -96,31 +96,46 @@ class BurgerBuilder extends Component {
   };
 
   confirmPurchaseHandler = () => {
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Jun Huang",
-        adddress: {
-          street: "586 50th St",
-          zipCode: "11220",
-        },
-        email: "test@gmail.com",
-      },
-    };
-    axios
-      .post("/orders", order)
-      .then((res, req) => {
-        this.setState({ loading: false });
-        // console.log(res);
-      })
-      .catch((err) => {
-        this.setState({ loading: false });
-        console.log(err);
-      });
+    // this.setState({ loading: true });
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: "Jun Huang",
+    //     adddress: {
+    //       street: "586 50th St",
+    //       zipCode: "11220",
+    //     },
+    //     email: "test@gmail.com",
+    //   },
+    // };
+    // axios
+    //   .post("/orders", order)
+    //   .then((res, req) => {
+    //     this.setState({ loading: false });
+    //     // console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     this.setState({ loading: false });
+    //     console.log(err);
+    //   });
 
     this.hideModalHandler();
+
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    queryParams.push("price=" + this.state.totalPrice);
+    const queryString = queryParams.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString,
+    });
   };
 
   render() {
@@ -173,7 +188,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <div className={classes.burgerBuilderContainer}>
-        <Navigation />
+        {/* <Navigation /> */}
         <CustomModal
           body={orderSummary}
           show={this.state.purchasing}
