@@ -3,7 +3,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import React, { Component } from "react";
 import "./ContactData.scss";
 import axios from "../../../axios-orders";
-
+import { connect } from "react-redux";
 class ContactData extends Component {
   state = {
     name: "",
@@ -19,8 +19,8 @@ class ContactData extends Component {
     e.preventDefault();
     this.setState({ loading: true });
     const order = {
-      ingredients: this.props.ingredients,
-      price: this.props.price,
+      ingredients: this.props.ings,
+      price: this.props.totalPrice,
       customer: {
         name: "Jun Huang",
         adddress: {
@@ -67,4 +67,11 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+  return {
+    ings: state.ingredients,
+    totalPrice: state.totalPrice,
+  };
+};
+
+export default connect(mapStateToProps, null)(ContactData);

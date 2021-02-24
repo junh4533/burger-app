@@ -5,29 +5,15 @@
   margin: 5px 0;
 }
 
-// .BuildControl button {
-//   display: block;
-//   font: inherit;
-//   padding: 5px;
-//   margin: 0 5px;
-//   width: 80px;
-//   border: 1px solid #aa6817;
-//   cursor: pointer;
-//   outline: none;
-// }
+.BuildControl {
+  svg[disabled] {
+    pointer-events: none;
+  }
+}
 
-// .BuildControl button:disabled {
-//   background-color: #ac9980;
-//   border: 1px solid #7e7365;
-//   color: #ccc;
-//   cursor: default;
-// }
-
-// .BuildControl button:hover:disabled {
-//   background-color: #ac9980;
-//   color: #ccc;
-//   cursor: not-allowed;
-// }
+.BuildControl svg:hover[disabled] {
+  pointer-events: none;
+}
 
 .Label {
   padding: 10px;
